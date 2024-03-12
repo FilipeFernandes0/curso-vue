@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Episode 2: Atribute binding and Basic Events</title>
+    <style>
+        html, body{
+            height: 100%;
+        }
+
+        body{
+            display: grid;
+            place-items: center;
+        }
+        .text-red{
+            color: red;
+        }
+        .text-green{
+            color: green;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div id="app">
+           <button v-bind:class="buttonClasses" v-on:click = "toggle"> Click me</button> 
+                <!-- nos queremos ligar esta classe ao buttonClasses: text-green
+                     ca em baixo 
+                -->
+                <!-- o v-on:click funciona como um botao quando clica vai os methods e o 
+                    nome que estiver a frente vai ser chamado para executar essa tal funcao
+                 -->
+           <button :class="buttonClasses"> Click me</button> 
+            <!-- tambem se pode fazer desta maneira em vez de escrever bind mete se os dois pontos
+            -->
+            <button :class="active ? 'text-red' : 'text-green'" v-on:click = "toggle"> Click me</button> 
+            <!-- nos metodos estamos a criar um botao on e off e na expressao do bind 
+                estamos a dizer que se estiver desligado fica verde se nao fica vermelho
+
+            -->
+
+            <button :class="active ? 'text-red' : 'text-green'" @click = "toggle"> Click me</button> 
+             <!-- podemos tambem usar o @ para referenciar o v-on
+            -->
+            <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script>
+    Vue.createApp({
+        data(){
+            return{
+                buttonClasses: "text-green",
+                active: false
+                
+            };
+        },
+        methods:{
+            toggle(){
+                this.buttonClasses = 'text-red';
+                this.active = ! this.active;
+            }
+        }
+    }).mount('#app');
+</script>
+    
+</body>
+
+
+</html>
